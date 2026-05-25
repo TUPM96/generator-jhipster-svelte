@@ -17,13 +17,14 @@
 <%_ if (cypressTests) { _%>
 		"e2e": "npm run e2e:ci -- --headed",
 		"e2e:ci": "cypress run --browser chrome",
-        "cy:open": "cypress open --e2e --browser chrome",
-<%_ } else if (playwrightTests) { _%>
+		"cy:open": "cypress open --e2e --browser chrome",
+<%_ } _%>
+<%_ if (playwrightTests && !cypressTests) { _%>
 		"e2e": "npm run e2e:ci -- --headed",
 		"e2e:ci": "playwright test",
 		"pw:open": "playwright test --ui",
-<%_ }
-	if (playwrightTests && cypressTests) { _%>
+<%_ } _%>
+<%_ if (playwrightTests && cypressTests) { _%>
 		"e2e:playwright": "playwright test",
 		"e2e:playwright:headed": "playwright test --headed",
 		"pw:open": "playwright test --ui",

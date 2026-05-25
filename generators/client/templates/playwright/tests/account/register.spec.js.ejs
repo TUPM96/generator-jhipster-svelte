@@ -57,9 +57,11 @@ test.describe('Register user', () => {
 		await expect(page.getByTestId('errorMsg')).toContainText('Login name already in use. Please choose another one.')
 	})
 
-	test('creates a new user account', async ({ page }) => {
-		await page.locator('[name="username"]').fill(`jon${Date.now()}`)
-		await page.locator('[name="email"]').fill(`joe${Date.now()}@localhost.org`)
+	test('creates a new user account', async ({ page }, testInfo) => {
+		const uniqueSuffix = `${testInfo.workerIndex}-${testInfo.retry}-${Date.now()}`
+
+		await page.locator('[name="username"]').fill(`jon${uniqueSuffix}`)
+		await page.locator('[name="email"]').fill(`joe${uniqueSuffix}@localhost.org`)
 		await page.locator('[name="password"]').fill('jondoe')
 		await page.locator('[name="passwordConfirm"]').fill('jondoe')
 		await page.getByTestId('registerForm').getByRole('button', { name: 'Create account' }).click()

@@ -11,6 +11,11 @@ const command = {
 			type: Boolean,
 			scope: 'blueprint',
 		},
+		playwright: {
+			description: 'Generate Playwright instead of Cypress for UI end-to-end tests',
+			type: Boolean,
+			scope: 'blueprint',
+		},
 	},
 };
 
